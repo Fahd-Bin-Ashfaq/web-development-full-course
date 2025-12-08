@@ -1,199 +1,293 @@
 
+## 1. What is HTML?
 
-## 🎯 What you will learn (simple)
+**HTML (HyperText Markup Language)** is the language used to **structure content on websites**.
 
-* What HTML is and why we use it
-* What tags, elements, and attributes are
-* Difference between block and inline elements
-* How to make a simple form to collect names
-* Examples you can copy and try
+### 🔧 Real-Life Example
 
----
-
-## 🧠 What is HTML?
-
-HTML stands for **HyperText Markup Language**. It is like the bones of a webpage — it tells a browser what parts are headings, paragraphs, images, and links.
-
-**Think:** If a webpage is a storybook, HTML is the book’s pages and chapters.
+* HTML = Structure of the house (walls, rooms)
+* CSS = Decoration & paint
+* JavaScript = Electricity & appliances
 
 ---
 
-## 📚 Easy core ideas
+## 2. HTML Tags
 
-### 1) Tags — the building blocks
+HTML tags tell the browser **how content should appear**.
 
-Tags look like this: `<tag>` and most have a closing tag `</tag>`.
+### Syntax
+
+```html
+<tagname>Content</tagname>
+```
+
+### Example
+
+```html
+<p>Hello World!</p>
+```
+
+---
+
+## 3. Types of HTML Tags
+
+### 3.1 Text Formatting Tags
+
+| Tag                | Purpose         | Example            |
+| ------------------ | --------------- | ------------------ |
+| `<h1>`-`<h6>`      | Headings        | Page titles        |
+| `<p>`              | Paragraph       | Article text       |
+| `<b>` / `<strong>` | Bold            | Important text     |
+| `<i>` / `<em>`     | Italic          | Quotes             |
+| `<br>`             | Line break      | Address formatting |
+| `<hr>`             | Horizontal line | Section breaker    |
+
+---
+
+### 3.2 Container Tags
+
+| Tag         | Purpose             | Example        |
+| ----------- | ------------------- | -------------- |
+| `<div>`     | Block container     | Page layout    |
+| `<span>`    | Inline container    | Highlight word |
+| `<section>` | Page section        | Services area  |
+| `<article>` | Independent content | Blog post      |
+| `<header>`  | Top section         | Website header |
+| `<footer>`  | Bottom section      | Contact info   |
+| `<main>`    | Main page           | Main article   |
+| `<nav>`     | Navigation links    | Menu bar       |
+| `<aside>`   | Side content        | Ads, links     |
+
+---
+
+### 3.3 Link & Media Tags
+
+| Tag        | Purpose    | Example            |
+| ---------- | ---------- | ------------------ |
+| `<a>`      | Hyperlink  | Go to another page |
+| `<img>`    | Image      | Display picture    |
+| `<video>`  | Video      | Embedded video     |
+| `<audio>`  | Audio      | Music player       |
+| `<iframe>` | Embed page | YouTube            |
+
+---
+
+### 3.4 Lists
+
+| Tag    | Purpose        |
+| ------ | -------------- |
+| `<ul>` | Unordered list |
+| `<ol>` | Ordered list   |
+| `<li>` | List item      |
+
+---
+
+### 3.5 Tables
+
+| Tag       | Purpose         |
+| --------- | --------------- |
+| `<table>` | Table container |
+| `<tr>`    | Table row       |
+| `<td>`    | Table cell      |
+| `<th>`    | Table header    |
+| `<thead>` | Header area     |
+| `<tbody>` | Data rows       |
+| `<tfoot>` | Summary         |
+
+---
+
+### 3.6 Forms
+
+| Tag          | Purpose         |
+| ------------ | --------------- |
+| `<form>`     | Form container  |
+| `<input>`    | Input field     |
+| `<textarea>` | Message box     |
+| `<button>`   | Button          |
+| `<label>`    | Label for input |
+| `<select>`   | Dropdown        |
+| `<option>`   | Dropdown option |
+
+🔑 **Input types:** text, email, password, number, checkbox, radio, file, submit.
+
+---
+
+## 4. Must-Know Attributes
+
+* `id`
+* `class`
+* `style`
+* `href`
+* `src`
+* `alt`
+* `title`
+* `value`
+* `placeholder`
+* `type`
+
+---
+
+## 5. Semantic vs Non-Semantic Tags
+
+### Semantic Tags
+
+Meaningful tags → better structure & SEO.
+
+Examples:
+`header`, `footer`, `nav`, `section`, `article`, `aside`, `main`
 
 **Example:**
 
 ```html
-<p>This is a paragraph.</p>
+<header>
+  <h1>My Website</h1>
+</header>
 ```
 
-* `<p>` is the opening tag.
-* `</p>` is the closing tag.
-* The text in the middle is the content.
+### Non-Semantic Tags
 
-**Real-life:** A tag is like a label on a box that says what is inside.
+No meaning → only layout.
+
+Examples:
+`div`, `span`
 
 ---
 
-### 2) Elements — a full piece
+## 6. Inline vs Block Elements
 
-An element is the opening tag + content + closing tag.
+### Block-Level
 
-**Example:** `<h1>My Title</h1>` is an element.
+* Start on new line
+* Full width
 
-**Real-life:** An element is like a full room (walls + furniture).
+Examples: `div`, `p`, `section`, `article`
 
----
+### Inline
 
-### 3) Attributes — extra details
+* Stay on same line
 
-Attributes give more information inside the opening tag. They look like `name="value"`.
-
-**Example:**
-
-```html
-<a href="https://example.com" target="_blank">Visit</a>
-<img src="photo.jpg" alt="My Photo">
-```
-
-* `href` tells where the link goes.
-* `src` tells where the image file is.
-
-**Real-life:** Attributes are like signs on a door that say “Staff Only” or “Push / Pull”.
+Examples: `span`, `a`, `img`, `strong`
 
 ---
 
-## 🧩 Types of tags (easy)
+## 7. Class vs ID
 
-1. **Paired tags** — have opening and closing:
+### Class
+
+* Used many times
 
 ```html
-<p>Hi</p>
+<p class="highlight">Hello</p>
 ```
 
-2. **Self-closing tags** — no closing tag needed:
+### ID
+
+* Unique
 
 ```html
-<img src="pic.jpg" alt="pic">
+<p id="title">Main title</p>
+```
+
+---
+
+## 8. Forms
+
+Forms collect user input.
+
+```html
+<form action="/submit" method="post"></form>
+```
+
+### Most Common Inputs
+
+* Text
+* Email
+* Password
+* Radio
+* Checkbox
+* Dropdown
+* Textarea
+* Submit Button
+
+---
+
+## 9. Complete Form Example
+
+```html
+<form action="/submit" method="post">
+
+<label>Name:</label>
+<input type="text" required>
 <br>
-```
 
-**Real-life:** Paired = box with lid. Self-closing = sticker.
+<label>Email:</label>
+<input type="email" required>
+<br>
 
----
+<button type="submit">Submit</button>
 
-## 🧱 Block vs Inline (very simple)
-
-* **Block elements** start on a new line and take full width.
-
-  * Examples: `<div>`, `<p>`, `<h1>`
-  * Real-life: A full wall.
-
-* **Inline elements** stay in the same line and take only needed space.
-
-  * Examples: `<span>`, `<a>`, `<img>`
-  * Real-life: A poster on the wall.
-
-**Try this:** Copy and paste in a file to see difference:
-
-```html
-<p>This is a paragraph. <span>Inline text here</span> More paragraph text.</p>
-<div>This is a div</div>
-<div>This is another div</div>
-```
-
----
-
-## 🏷 Common tags with simple examples (copy and try)
-
-* Headings: `<h1>Big title</h1>` up to `<h6>`
-* Paragraph: `<p>This is a paragraph.</p>`
-* Link: `<a href="https://example.com">Click me</a>`
-* Image: `<img src="photo.jpg" alt="photo">`
-* Unordered list:
-
-```html
-<ul>
-  <li>Apple</li>
-  <li>Banana</li>
-</ul>
-```
-
-* Ordered list:
-
-```html
-<ol>
-  <li>First</li>
-  <li>Second</li>
-</ol>
-```
-
-* Container: `<div>Section content</div>`
-* Inline: `<span>small text</span>`
-
-**Real-life short analogies:**
-
-* Heading = chapter title
-* Paragraph = a paragraph in a book
-* Link = a road sign to another page
-* Image = a photo on the wall
-* List = grocery list or recipe steps
-
----
-
-## 📝 Forms — collect input from users
-
-A form lets us ask users for information like name or email.
-
-**Simple form example:**
-
-```html
-<form>
-  <label for="name">Name:</label>
-  <input type="text" id="name" name="name" placeholder="Enter your name">
-  <br>
-  <label for="age">Age:</label>
-  <input type="number" id="age" name="age">
-  <br>
-  <button type="submit">Send</button>
 </form>
 ```
 
-### Common input types (with short meaning):
+---
 
-* `text` — for short words or names
-* `number` — for numbers
-* `email` — email addresses
-* `password` — hidden text for passwords
-* `checkbox` — choose many options
-* `radio` — choose one of many
-* `date` — pick a date
-* `file` — upload a file or image
+# 📝 Practical Exercises
 
-**Real-life:** A form is like a school registration paper where you write name, age and class.
+## 1️⃣ Text Formatting
+
+Create a page with:
+
+* `<h1>` Your Name
+* `<h2>` Your Profession
+* `<p>` Introduction
+* Bold & italic words
+* `<hr>` line
 
 ---
 
-## ✅ Small Tasks (easy)
+## 2️⃣ Lists & Links
 
-1. Make a file `intro.html`. Add:
-
-   * `<h1>` with your name
-   * A short `<p>` about your hobby
-   * An `<img>` (any photo) with `alt`
-   * A link to your favourite website
-
-2. Make `list.html` with:
-
-   * An unordered list of 3 favourite foods
-   * An ordered list of steps to make tea
-
-3. Make `form.html` with a form that asks for name and age. Add comments to explain each line.
+* Create `<ul>` of 5 foods
+* Create `<ol>` steps to make tea
+* Add a link that opens in new tab
 
 ---
 
+## 3️⃣ Images
 
+* Add a profile picture using `<img>`
+* Add `alt` and `title`
 
+---
+
+## 4️⃣ Forms
+
+Create:
+
+* Name
+* Email
+* Message
+* Submit button
+
+---
+
+## 5️⃣ Mini Projects
+
+* Personal bio page
+* Favorite hobby post
+* Product table
+* Contact form
+* Simple portfolio
+
+---
+
+# 🎯 Beginner Tips
+
+* Close your tags
+* Use semantic tags
+* Indent properly
+* Test in browser often
+
+---
+
+## End of Document ✔
