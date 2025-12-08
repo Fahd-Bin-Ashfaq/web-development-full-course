@@ -195,24 +195,5 @@ A form lets us ask users for information like name or email.
 
 ---
 
-## 🧑‍🏫 Teacher tips (for students)
 
-* Save files with `.html` and open them in a web browser to see results.
-* Use small changes and refresh the browser to learn fast.
-* Ask a friend to try your page and tell you what they see.
 
----
-
-## 📎 Short summary (one line each)
-
-* HTML makes the structure of a webpage.
-* Tags tell the browser what each piece is.
-* Elements are tags with content.
-* Attributes give extra details.
-* Forms collect answers from users.
-
-Happy learning! 🎉
-
----
-
-*If you want, I can now add a printable worksheet, a short quiz, or classroom slide images.*
