@@ -1,16 +1,21 @@
-# CSS Core Concepts – README
+# 🎨 CSS Core Concepts – Complete README
+
+This document covers the **core foundations of CSS layouts** with clear explanations of:
+
+* What each property does
+* When to use it
+* Available values
+* Simple, real-world examples
 
 ---
 
 ## 1. CSS Units
 
-CSS units define the size of elements like width, height, margin, padding, and font size.
-
-### Types of Units
+CSS units define the size of elements such as width, height, margin, padding, and font-size.
 
 ### Absolute Units (Fixed)
 
-* `px` (pixel)
+#### `px` (pixel)
 
 ```css
 p {
@@ -18,19 +23,21 @@ p {
 }
 ```
 
-**Point:** Absolute units do not change automatically.
+**Note:** Absolute units do not change with screen size.
 
 ---
 
 ### Relative Units (Responsive)
 
-These units change according to screen, browser, or parent element.
+Relative units adapt based on parent, root, or viewport.
 
-* `%` → relative to parent
-* `em` → relative to parent font size
-* `rem` → relative to root (html) font size
-* `vw` → viewport width
-* `vh` → viewport height
+| Unit  | Relative To           |
+| ----- | --------------------- |
+| `%`   | Parent element        |
+| `em`  | Parent font-size      |
+| `rem` | Root (html) font-size |
+| `vw`  | Viewport width        |
+| `vh`  | Viewport height       |
 
 ```css
 div { width: 50%; }
@@ -38,48 +45,73 @@ h1 { font-size: 2rem; }
 section { height: 100vh; }
 ```
 
-**Default browser font size:** `16px`
+**Default browser font-size:** `16px`
 
 ---
 
 ## 2. Display Property
 
-The `display` property controls how an element appears on the screen.
-
-### Common Display Values
+Controls how an element appears and behaves in layout.
 
 ### `block`
 
 * Starts on a new line
 * Takes full width
 
-Examples: `div`, `p`, `h1`
+```css
+div {
+  display: block;
+}
+```
+
+---
 
 ### `inline`
 
-* Stays in same line
-* Width/height do not work
+* Same line
+* Width and height do not work
 
-Examples: `span`, `a`
+```css
+span {
+  display: inline;
+}
+```
+
+---
 
 ### `inline-block`
 
 * Same line
-* Width/height work
+* Width and height work
 
-Examples: `img`, `button`, `input`
+```css
+button {
+  display: inline-block;
+  width: 120px;
+}
+```
+
+---
 
 ### `none`
 
-* Completely hides element
+* Completely removes element from layout
+
+```css
+.modal {
+  display: none;
+}
+```
+
+---
 
 ### `flex`
 
-* One‑dimensional layout
+* One-dimensional layout (row OR column)
 
 ### `grid`
 
-* Two‑dimensional layout
+* Two-dimensional layout (rows AND columns)
 
 ---
 
@@ -87,7 +119,7 @@ Examples: `img`, `button`, `input`
 
 ### What is Flexbox?
 
-Flexbox is a layout system used to align items in a **row or column**.
+Flexbox is a **one-dimensional layout system** used for arranging items in a row or column.
 
 ```css
 .container {
@@ -97,37 +129,198 @@ Flexbox is a layout system used to align items in a **row or column**.
 
 ### When to Use Flexbox
 
-* Navbar
-* Buttons in a row
+* Navigation bars
+* Button groups
 * Cards alignment
 * Centering elements
 
-### Why Use Flexbox?
+---
 
-* Easy alignment
-* Responsive design
-* Less CSS code
+## Flexbox Container Properties (Parent)
+
+### `flex-direction`
+
+Defines the main axis direction.
+
+**Values:**
+
+* `row` (default)
+* `row-reverse`
+* `column`
+* `column-reverse`
+
+```css
+.container {
+  flex-direction: row;
+}
+```
 
 ---
 
-### Flexbox Container Properties
+### `flex-wrap`
 
-* `display: flex`
-* `flex-direction`
-* `flex-wrap`
-* `justify-content`
-* `align-items`
-* `align-content`
-* `gap`
+Controls whether items wrap or stay on one line.
 
-### Flexbox Item Properties
+**Values:**
 
-* `order`
-* `flex-grow`
-* `flex-shrink`
-* `flex-basis`
-* `flex`
-* `align-self`
+* `nowrap` (default)
+* `wrap`
+* `wrap-reverse`
+
+```css
+.container {
+  flex-wrap: wrap;
+}
+```
+
+---
+
+### `justify-content`
+
+Aligns items along the **main axis**.
+
+**Values:**
+
+* `flex-start`
+* `center`
+* `flex-end`
+* `space-between`
+* `space-around`
+* `space-evenly`
+
+```css
+.container {
+  justify-content: space-between;
+}
+```
+
+---
+
+### `align-items`
+
+Aligns items along the **cross axis**.
+
+**Values:**
+
+* `stretch` (default)
+* `center`
+* `flex-start`
+* `flex-end`
+* `baseline`
+
+```css
+.container {
+  align-items: center;
+}
+```
+
+---
+
+### `align-content`
+
+Used when multiple rows exist (`flex-wrap: wrap`).
+
+```css
+.container {
+  align-content: space-between;
+}
+```
+
+---
+
+### `gap`
+
+Adds spacing between flex items.
+
+```css
+.container {
+  gap: 20px;
+}
+```
+
+---
+
+## Flexbox Item Properties (Child)
+
+### `order`
+
+Changes visual order of items.
+
+```css
+.item1 {
+  order: 2;
+}
+```
+
+---
+
+### `flex-grow`
+
+Controls how much an item grows relative to others.
+
+**Default:** `0`
+
+```css
+.item1 {
+  flex-grow: 1;
+}
+
+.item2 {
+  flex-grow: 2;
+}
+```
+
+---
+
+### `flex-shrink`
+
+Controls how much an item shrinks when space is limited.
+
+```css
+.item {
+  flex-shrink: 0;
+}
+```
+
+---
+
+### `flex-basis`
+
+Defines initial size before grow/shrink.
+
+```css
+.item {
+  flex-basis: 200px;
+}
+```
+
+---
+
+### `flex`
+
+Shorthand for:
+
+```
+flex: grow shrink basis;
+```
+
+```css
+.item {
+  flex: 1 1 200px;
+}
+```
+
+---
+
+### `align-self`
+
+Overrides `align-items` for a single item.
+
+```css
+.item {
+  align-self: center;
+}
+```
 
 ---
 
@@ -135,7 +328,7 @@ Flexbox is a layout system used to align items in a **row or column**.
 
 ### What is Grid?
 
-CSS Grid is a **two‑dimensional layout system** (rows + columns).
+CSS Grid is a **two-dimensional layout system**.
 
 ```css
 .container {
@@ -145,100 +338,144 @@ CSS Grid is a **two‑dimensional layout system** (rows + columns).
 
 ### When to Use Grid
 
-* Full page layout
+* Full website layouts
 * Dashboards
-* Image galleries
-* Website structure
+* Galleries
+* Page structure
 
 ---
 
-### Grid Container Properties
+## Grid Container Properties
 
-* `grid-template-columns`
-* `grid-template-rows`
-* `gap`
-* `justify-items`
-* `align-items`
-* `justify-content`
-* `align-content`
-* `grid-template-areas`
+### `grid-template-columns`
 
-### Grid Item Properties
-
-* `grid-column`
-* `grid-row`
-* `grid-area`
-* `justify-self`
-* `align-self`
-
-### `fr` Unit
-
-* Fraction of available space
+Defines columns structure.
 
 ```css
-grid-template-columns: 1fr 2fr;
-```
-
----
-
-## 5. Position Property
-
-The `position` property controls the exact placement of elements.
-
-### Position Types
-
-### `static`
-
-* Default position
-
-### `relative`
-
-* Moves relative to itself
-
-### `absolute`
-
-* Moves relative to nearest positioned parent
-
-### `fixed`
-
-* Fixed to viewport
-
-### `sticky`
-
-* Scroll then stick
-
-```css
-.box {
-  position: absolute;
-  top: 0;
-  right: 0;
+.container {
+  grid-template-columns: 1fr 2fr;
 }
 ```
 
 ---
 
-## 6. Flex vs Grid (Quick Review)
+### `grid-template-rows`
 
-| Flexbox         | Grid             |
-| --------------- | ---------------- |
-| One‑dimensional | Two‑dimensional  |
-| Row OR column   | Rows AND columns |
-| Small layouts   | Full layouts     |
+Defines row structure.
+
+```css
+grid-template-rows: 100px auto;
+```
 
 ---
 
-## Final Summary
+### `gap`
+
+Adds spacing between rows and columns.
+
+---
+
+### `justify-items`
+
+Aligns items horizontally inside cells.
+
+---
+
+### `align-items`
+
+Aligns items vertically inside cells.
+
+---
+
+## Grid Item Properties
+
+### `grid-column`
+
+Controls column span.
+
+```css
+.item {
+  grid-column: 1 / 3;
+}
+```
+
+---
+
+### `grid-row`
+
+Controls row span.
+
+---
+
+### `grid-area`
+
+Places item using named areas.
+
+---
+
+## 5. Position Property
+
+Controls exact placement of elements.
+
+### `static`
+
+Default behavior.
+
+---
+
+### `relative`
+
+Moves element relative to itself.
+
+```css
+.box {
+  position: relative;
+  top: 10px;
+}
+```
+
+---
+
+### `absolute`
+
+Moves relative to nearest positioned parent.
+
+---
+
+### `fixed`
+
+Fixed to viewport (e.g., navbar).
+
+---
+
+### `sticky`
+
+Scrolls normally, then sticks.
+
+---
+
+## 6. Flexbox vs Grid
+
+| Flexbox         | Grid            |
+| --------------- | --------------- |
+| One-dimensional | Two-dimensional |
+| Components      | Full layouts    |
+| Simple          | Complex         |
+
+---
+
+## ✅ Final Summary
 
 This README covers:
 
 * CSS Units
-* Display property
+* Display Property
 * Flexbox
 * Grid
-* Position property
+* Position Property
 
-These topics together form the **core foundation of CSS layouts**.
+These topics form the **core foundation of CSS layout design**.
 
 ---
 
-Happy Learning 🚀
+🚀 **Happy Learning!**
