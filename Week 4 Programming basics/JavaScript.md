@@ -41,3 +41,11 @@ multi-line comment
 
 Real-Life Example:
 Comments are like sticky notes on a book: they explain or remind of something without affecting the main content.
+
+| Function            | Purpose                       |
+| ------------------- | ----------------------------- |
+| `console.log()`     | Print output in console       |
+| `alert()`           | Show output in browser pop-up |
+| `typeof`            | Check data type of a value    |
+| `Array.isArray()`   | Check if a value is an array  |
+
