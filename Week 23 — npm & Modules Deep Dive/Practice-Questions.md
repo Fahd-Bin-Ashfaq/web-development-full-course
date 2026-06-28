@@ -1,0 +1,643 @@
+# Week 23 — npm & Modules Deep Dive: Practice Questions
+
+**Total Questions: 20** (10 MCQs + 5 Short Answer + 5 Coding Exercises)
+
+---
+
+## Part 1: Multiple Choice Questions (MCQs)
+
+**1. What does npm stand for?**
+
+- A) Node Project Manager
+- B) New Package Manager
+- C) Node Package Manager
+- D) Node Program Modules
+
+<details>
+<summary>Answer</summary>
+
+**C) Node Package Manager**
+
+npm is the default package manager for Node.js. It allows developers to install, share, and manage third-party packages (reusable code libraries). It was created in 2010 and is now the world's largest software registry with over 2 million packages.
+</details>
+
+---
+
+**2. Which command creates a `package.json` file with all default values without asking any questions?**
+
+- A) `npm create`
+- B) `npm init`
+- C) `npm init -y`
+- D) `npm start`
+
+<details>
+<summary>Answer</summary>
+
+**C) `npm init -y`**
+
+The `-y` flag (short for `--yes`) tells npm to accept all default values without prompting the developer for input. This is the fastest way to create a `package.json` when you want to get started quickly. You can always edit the fields later.
+</details>
+
+---
+
+**3. What is the difference between `dependencies` and `devDependencies` in `package.json`?**
+
+- A) There is no difference
+- B) `dependencies` are for the backend; `devDependencies` are for the frontend
+- C) `dependencies` are needed to run the app; `devDependencies` are needed only during development
+- D) `devDependencies` are installed first
+
+<details>
+<summary>Answer</summary>
+
+**C) `dependencies` are needed to run the app; `devDependencies` are needed only during development**
+
+`dependencies` (e.g., `express`, `mongoose`) are packages your application needs to function in production. `devDependencies` (e.g., `nodemon`, `jest`, `eslint`) are tools used only during development — they are not needed when the app runs in production. Install dev dependencies with `npm install -D <package>`.
+</details>
+
+---
+
+**4. Which command installs a package as a development dependency?**
+
+- A) `npm install --dev nodemon`
+- B) `npm install --save-dev nodemon`
+- C) `npm install --production nodemon`
+- D) `npm install --global nodemon`
+
+<details>
+<summary>Answer</summary>
+
+**B) `npm install --save-dev nodemon`**
+
+The `--save-dev` flag (shorthand: `-D`) saves the package under `devDependencies` in `package.json`. This tells npm that this package is only needed during development. The shorthand command is `npm i -D nodemon`.
+</details>
+
+---
+
+**5. Why should `node_modules` be added to `.gitignore`?**
+
+- A) It contains secret API keys
+- B) It is too large, can be regenerated with `npm install`, and may differ across operating systems
+- C) Git cannot track JavaScript files
+- D) It slows down the npm install process
+
+<details>
+<summary>Answer</summary>
+
+**B) It is too large, can be regenerated with `npm install`, and may differ across operating systems**
+
+The `node_modules` folder can contain tens of thousands of files and hundreds of megabytes of data. Since anyone can regenerate it by running `npm install` (which reads `package.json` and `package-lock.json`), there is no reason to store it in Git. Additionally, some packages compile native code differently on Windows, macOS, and Linux, so the folder contents can differ across systems.
+</details>
+
+---
+
+**6. In semantic versioning `2.4.1`, what does the `4` represent?**
+
+- A) Major version
+- B) Minor version
+- C) Patch version
+- D) Build number
+
+<details>
+<summary>Answer</summary>
+
+**B) Minor version**
+
+In semantic versioning (MAJOR.MINOR.PATCH), the middle number is the **minor** version. It is incremented when new features are added in a backward-compatible manner. In `2.4.1`: `2` is the major version, `4` is the minor version, and `1` is the patch version.
+</details>
+
+---
+
+**7. What does the caret (`^`) mean in `"express": "^4.18.2"`?**
+
+- A) Install exactly version 4.18.2
+- B) Install any version of express
+- C) Install version >=4.18.2 but <5.0.0 (allows minor and patch updates)
+- D) Install version >=4.18.2 but <4.19.0 (allows patch updates only)
+
+<details>
+<summary>Answer</summary>
+
+**C) Install version >=4.18.2 but <5.0.0 (allows minor and patch updates)**
+
+The caret (`^`) is the default symbol npm uses. It allows updates to the minor and patch versions but blocks major version changes (which could introduce breaking changes). So `^4.18.2` accepts `4.18.3`, `4.19.0`, `4.20.5`, etc., but never `5.0.0` or higher.
+</details>
+
+---
+
+**8. What is the purpose of `package-lock.json`?**
+
+- A) To store environment variables
+- B) To lock exact dependency versions so all developers get the same packages
+- C) To replace `package.json`
+- D) To encrypt `node_modules`
+
+<details>
+<summary>Answer</summary>
+
+**B) To lock exact dependency versions so all developers get the same packages**
+
+`package-lock.json` is auto-generated by npm and records the exact version of every installed package (including sub-dependencies). This ensures that when another developer runs `npm install`, they get exactly the same versions — preventing "it works on my machine" bugs. It should be committed to Git but never edited manually.
+</details>
+
+---
+
+**9. Which command runs a custom npm script called `dev`?**
+
+- A) `npm dev`
+- B) `npm run dev`
+- C) `npm start dev`
+- D) `npm execute dev`
+
+<details>
+<summary>Answer</summary>
+
+**B) `npm run dev`**
+
+Custom scripts defined in `package.json` must be run with the `run` keyword: `npm run <script-name>`. Only `start` and `test` are special — they can be run without `run` (i.e., `npm start` and `npm test`). All other scripts require `npm run`.
+</details>
+
+---
+
+**10. What does the `dotenv` package do?**
+
+- A) Creates a new `.env` file automatically
+- B) Encrypts environment variables
+- C) Loads variables from a `.env` file into `process.env`
+- D) Publishes environment variables to npm
+
+<details>
+<summary>Answer</summary>
+
+**C) Loads variables from a `.env` file into `process.env`**
+
+The `dotenv` package reads key-value pairs from a `.env` file in your project root and adds them to `process.env`. This allows you to keep sensitive data (API keys, database URLs, secrets) out of your source code. You call `require("dotenv").config()` at the top of your entry file to load the variables.
+</details>
+
+---
+
+## Part 2: Short Answer Questions
+
+**1. Explain the difference between installing a package locally and globally. Give an example of when you would use each.**
+
+<details>
+<summary>Answer</summary>
+
+**Local installation** (`npm install <package>`) saves the package inside the project's `node_modules` folder. It is only available to that specific project and is listed in `package.json`. Use local installation for packages your project depends on, such as `express` or `mongoose`.
+
+**Global installation** (`npm install -g <package>`) saves the package in a system-wide directory, making its CLI commands available from any terminal window regardless of the current project. Use global installation for CLI tools you want to use across multiple projects, such as `nodemon` or `create-react-app`.
+
+**Best practice:** Prefer local installation and use npm scripts to run tools. This ensures every developer on the team uses the same version of the tool without needing to install it globally.
+</details>
+
+---
+
+**2. What is semantic versioning and why is it important? Explain the meaning of each number in `3.7.2`.**
+
+<details>
+<summary>Answer</summary>
+
+**Semantic Versioning (SemVer)** is a versioning convention that uses three numbers separated by dots: `MAJOR.MINOR.PATCH`. It communicates what type of changes were made in each release.
+
+In `3.7.2`:
+- **3 (MAJOR):** Incremented when there are breaking changes that may require you to update your code. Going from `2.x.x` to `3.0.0` means something changed in a way that could break existing usage.
+- **7 (MINOR):** Incremented when new features are added in a backward-compatible way. Your existing code will still work.
+- **2 (PATCH):** Incremented for backward-compatible bug fixes. These are safe, small updates.
+
+SemVer is important because it lets developers make informed decisions about updating packages. You can safely update patch and minor versions, but major version upgrades require testing for breaking changes.
+</details>
+
+---
+
+**3. Why should you never commit your `.env` file to Git? What should you do instead so other developers know which environment variables they need?**
+
+<details>
+<summary>Answer</summary>
+
+The `.env` file contains **sensitive information** such as database passwords, API keys, JWT secrets, and other credentials. If committed to Git (especially a public repository), anyone can see these secrets and potentially access your database, steal data, or abuse your API keys.
+
+**What to do instead:**
+
+1. Add `.env` to your `.gitignore` file so Git ignores it.
+2. Create a `.env.example` file that contains all the same variable names but with **placeholder values** instead of real credentials:
+   ```
+   PORT=3000
+   DATABASE_URL=your-database-url-here
+   JWT_SECRET=your-secret-key-here
+   ```
+3. Commit `.env.example` to Git. When a new developer clones the project, they copy `.env.example` to `.env` and fill in their own credentials.
+</details>
+
+---
+
+**4. What is `package-lock.json` and why should you commit it to Git? How is it different from `package.json`?**
+
+<details>
+<summary>Answer</summary>
+
+`package-lock.json` is an auto-generated file that records the **exact version** of every dependency and sub-dependency in your project. While `package.json` might say `"express": "^4.18.2"` (meaning any version from 4.18.2 to 4.x.x), the lock file records the precise version that was actually installed (e.g., `4.18.2`).
+
+**Why commit it to Git:** It ensures that every developer and every deployment gets exactly the same dependency versions. Without it, two developers running `npm install` at different times could get different minor/patch versions, leading to inconsistent behavior.
+
+**How it differs from `package.json`:**
+- `package.json` lists your **direct** dependencies with version ranges.
+- `package-lock.json` lists **all** dependencies (including sub-dependencies) with exact versions.
+- `package.json` is written by you; `package-lock.json` is generated by npm.
+</details>
+
+---
+
+**5. What is Nodemon and why is it useful during development? Should it be a regular dependency or a dev dependency?**
+
+<details>
+<summary>Answer</summary>
+
+**Nodemon** is a tool that monitors your source files and automatically restarts the Node.js server whenever a file change is detected. Without Nodemon, you would need to manually stop the server (Ctrl+C) and restart it (`node index.js`) every time you make a code change.
+
+Nodemon should be installed as a **dev dependency** (`npm install -D nodemon`) because it is only needed during development. In production, you would not want the server to restart on every file change — production servers are managed by process managers like PM2.
+
+A typical setup defines an npm script for development: `"dev": "nodemon index.js"`. Developers run `npm run dev` during development and `npm start` (which runs `node index.js`) in production.
+</details>
+
+---
+
+## Part 3: Coding Exercises
+
+**1. Project Setup — Initialize and configure a Node.js project**
+
+Create a new Node.js project with `npm init -y`. Then install `express` as a regular dependency and `nodemon` as a dev dependency. Add the following npm scripts to `package.json`: `start` should run `node index.js`, and `dev` should run `nodemon index.js`. Create an `index.js` that logs "Server is ready!"
+
+<details>
+<summary>Answer</summary>
+
+**Terminal commands:**
+
+```bash
+mkdir my-api-project
+cd my-api-project
+npm init -y
+npm install express
+npm install -D nodemon
+```
+
+**Edit `package.json` scripts section:**
+
+```json
+{
+  "name": "my-api-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
+```
+
+**`index.js`:**
+
+```javascript
+console.log("Server is ready!");
+```
+
+**Run it:**
+
+```bash
+npm start      # Runs once with node
+npm run dev    # Runs with nodemon (auto-restarts on changes)
+```
+
+**Key concepts:** Using `npm init -y` for quick setup, understanding the difference between regular and dev dependencies, and configuring npm scripts for development and production workflows.
+</details>
+
+---
+
+**2. Custom Modules — Create and use a utility module**
+
+Create a module called `helpers.js` that exports three functions: `toCelsius(fahrenheit)` (converts Fahrenheit to Celsius), `toFahrenheit(celsius)` (converts Celsius to Fahrenheit), and `formatTemp(value, unit)` (returns a formatted string like `"25.0 C"`). Then use all three functions in `index.js`.
+
+<details>
+<summary>Answer</summary>
+
+**`helpers.js`:**
+
+```javascript
+// helpers.js
+
+const toCelsius = (fahrenheit) => {
+  return ((fahrenheit - 32) * 5) / 9;
+};
+
+const toFahrenheit = (celsius) => {
+  return (celsius * 9) / 5 + 32;
+};
+
+const formatTemp = (value, unit) => {
+  return `${value.toFixed(1)} ${unit}`;
+};
+
+module.exports = { toCelsius, toFahrenheit, formatTemp };
+```
+
+**`index.js`:**
+
+```javascript
+// index.js
+const { toCelsius, toFahrenheit, formatTemp } = require("./helpers");
+
+// Convert 98.6 F to Celsius
+const bodyTempC = toCelsius(98.6);
+console.log("Body temperature:", formatTemp(bodyTempC, "C"));
+// Output: Body temperature: 37.0 C
+
+// Convert 0 C to Fahrenheit
+const freezingF = toFahrenheit(0);
+console.log("Freezing point:", formatTemp(freezingF, "F"));
+// Output: Freezing point: 32.0 F
+
+// Convert 100 C to Fahrenheit
+const boilingF = toFahrenheit(100);
+console.log("Boiling point:", formatTemp(boilingF, "F"));
+// Output: Boiling point: 212.0 F
+```
+
+**Key concepts:** Using `module.exports` to expose functions from a module, using destructured `require()` to import specific functions, and organizing reusable logic into separate files.
+</details>
+
+---
+
+**3. Environment Variables — Use dotenv to manage configuration**
+
+Install the `dotenv` package. Create a `.env` file with `PORT=4000`, `APP_NAME=MyApp`, and `NODE_ENV=development`. Write an `index.js` that loads these variables and logs a startup message showing all three values. Also create a `.env.example` file with placeholder values and a `.gitignore` that excludes `.env` and `node_modules`.
+
+<details>
+<summary>Answer</summary>
+
+**Terminal:**
+
+```bash
+npm install dotenv
+```
+
+**`.env`:**
+
+```
+PORT=4000
+APP_NAME=MyApp
+NODE_ENV=development
+```
+
+**`.env.example`:**
+
+```
+PORT=3000
+APP_NAME=YourAppName
+NODE_ENV=development
+```
+
+**`.gitignore`:**
+
+```
+node_modules/
+.env
+```
+
+**`index.js`:**
+
+```javascript
+// index.js
+require("dotenv").config();
+
+const port = process.env.PORT || 3000;
+const appName = process.env.APP_NAME || "DefaultApp";
+const environment = process.env.NODE_ENV || "production";
+
+console.log("=================================");
+console.log(`  App Name:    ${appName}`);
+console.log(`  Port:        ${port}`);
+console.log(`  Environment: ${environment}`);
+console.log("=================================");
+
+if (environment === "development") {
+  console.log("Running in development mode.");
+  console.log("Debug logging is enabled.");
+} else {
+  console.log("Running in production mode.");
+}
+```
+
+**Expected output:**
+
+```
+=================================
+  App Name:    MyApp
+  Port:        4000
+  Environment: development
+=================================
+Running in development mode.
+Debug logging is enabled.
+```
+
+**Key concepts:** Using `dotenv` to load environment variables, providing fallback values with `||`, creating `.env.example` for team collaboration, and adding `.env` to `.gitignore` for security.
+</details>
+
+---
+
+**4. npm Scripts — Create a project with multiple useful scripts**
+
+Set up a project with the following npm scripts: `start` runs `node src/index.js`, `dev` runs `nodemon src/index.js`, `greet` logs "Hello from npm scripts!", and `info` runs `node -v` followed by `npm -v`. Create `src/index.js` that prints "App is running."
+
+<details>
+<summary>Answer</summary>
+
+**Project structure:**
+
+```
+my-scripts-project/
++-- src/
+|   +-- index.js
++-- package.json
+```
+
+**Terminal:**
+
+```bash
+mkdir my-scripts-project
+cd my-scripts-project
+npm init -y
+mkdir src
+npm install -D nodemon
+```
+
+**`package.json`** (scripts section):
+
+```json
+{
+  "name": "my-scripts-project",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "greet": "echo Hello from npm scripts!",
+    "info": "node -v && npm -v"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
+```
+
+**`src/index.js`:**
+
+```javascript
+// src/index.js
+console.log("App is running.");
+console.log(`Started at: ${new Date().toLocaleTimeString()}`);
+```
+
+**Running the scripts:**
+
+```bash
+npm start           # Output: App is running.
+npm run dev         # Same, but restarts on file changes
+npm run greet       # Output: Hello from npm scripts!
+npm run info        # Output: v20.11.0 \n 10.2.4
+```
+
+**Key concepts:** Defining custom npm scripts, using `npm start` without the `run` keyword (special script), using `npm run <name>` for custom scripts, and chaining commands with `&&` inside scripts.
+</details>
+
+---
+
+**5. Multi-Module Project — Build a student grade calculator**
+
+Create a project with three modules: `students.js` (exports an array of student objects with `name` and `scores` properties), `calculator.js` (exports functions `getAverage(scores)` and `getGrade(average)` that returns "A" for 90+, "B" for 80+, "C" for 70+, "D" for 60+, or "F"), and `index.js` (imports both modules, calculates each student's average and grade, and prints a formatted report).
+
+<details>
+<summary>Answer</summary>
+
+**`students.js`:**
+
+```javascript
+// students.js
+
+const students = [
+  { name: "Ali Ahmed", scores: [92, 88, 95, 90] },
+  { name: "Sara Khan", scores: [78, 82, 75, 80] },
+  { name: "Omar Farooq", scores: [65, 70, 68, 72] },
+  { name: "Fatima Zahra", scores: [95, 98, 92, 97] },
+  { name: "Hassan Raza", scores: [55, 60, 58, 62] }
+];
+
+module.exports = students;
+```
+
+**`calculator.js`:**
+
+```javascript
+// calculator.js
+
+const getAverage = (scores) => {
+  const sum = scores.reduce((acc, score) => acc + score, 0);
+  return sum / scores.length;
+};
+
+const getGrade = (average) => {
+  if (average >= 90) return "A";
+  if (average >= 80) return "B";
+  if (average >= 70) return "C";
+  if (average >= 60) return "D";
+  return "F";
+};
+
+module.exports = { getAverage, getGrade };
+```
+
+**`index.js`:**
+
+```javascript
+// index.js
+const students = require("./students");
+const { getAverage, getGrade } = require("./calculator");
+
+console.log("========================================");
+console.log("        STUDENT GRADE REPORT            ");
+console.log("========================================");
+console.log("");
+
+students.forEach((student) => {
+  const average = getAverage(student.scores);
+  const grade = getGrade(average);
+
+  console.log(`Name:    ${student.name}`);
+  console.log(`Scores:  ${student.scores.join(", ")}`);
+  console.log(`Average: ${average.toFixed(1)}`);
+  console.log(`Grade:   ${grade}`);
+  console.log("----------------------------------------");
+});
+
+// Class statistics
+const allAverages = students.map((s) => getAverage(s.scores));
+const classAverage = allAverages.reduce((a, b) => a + b, 0) / allAverages.length;
+
+console.log("");
+console.log(`Class Average: ${classAverage.toFixed(1)}`);
+console.log(`Highest:       ${Math.max(...allAverages).toFixed(1)}`);
+console.log(`Lowest:        ${Math.min(...allAverages).toFixed(1)}`);
+```
+
+**Expected output:**
+
+```
+========================================
+        STUDENT GRADE REPORT
+========================================
+
+Name:    Ali Ahmed
+Scores:  92, 88, 95, 90
+Average: 91.3
+Grade:   A
+----------------------------------------
+Name:    Sara Khan
+Scores:  78, 82, 75, 80
+Average: 78.8
+Grade:   C
+----------------------------------------
+Name:    Omar Farooq
+Scores:  65, 70, 68, 72
+Average: 68.8
+Grade:   D
+----------------------------------------
+Name:    Fatima Zahra
+Scores:  95, 98, 92, 97
+Average: 95.5
+Grade:   A
+----------------------------------------
+Name:    Hassan Raza
+Scores:  55, 60, 58, 62
+Average: 58.8
+Grade:   F
+----------------------------------------
+
+Class Average: 78.4
+Highest:       95.5
+Lowest:        58.8
+```
+
+**Key concepts:** Splitting code into multiple focused modules, using `module.exports` for different export styles (array vs. object of functions), importing with `require()`, and combining multiple modules in a main entry point.
+</details>
+
+---
+
+> **Tip:** For your next project, challenge yourself to set up a complete Node.js project from scratch: `npm init`, install dependencies, create a `.gitignore`, configure npm scripts, use environment variables, and organize your code into modules. This workflow is what professional developers do every day.
